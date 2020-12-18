@@ -1,0 +1,8 @@
+{
+    "stopped_at_goal": true,
+    "no_collision": true,
+    "flight_time": 11.4,
+    "flight_distance": 30.39,
+    "planning_time": 48.14,
+    "collision_point": null
+}
