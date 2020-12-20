@@ -23,15 +23,11 @@ from proj1_3.code.world_traj import WorldTraj
 
 # Choose a test example file. You should write your own example files too!
 #filename = '../util/test_window.json'
-#filename = '../util/test_maze.json'
+filename = '../util/test_maze.json'
 #filename = '../util/test_over_under.json'
 #filename = '../util/test_over_under_baby.json'
-#filename = '../util/test_empty.json'
-filename = '../util/test_saw.json'
 #filename = '../util/test_impossible.json'
 #filename = '../util/mymap.json'
-#filename = '../util/test_forest.json'
-#filename = '../util/test_lab_1.json'
 
 
 # Load the test example.
