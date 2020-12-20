@@ -27,9 +27,9 @@ from proj1_3.code.world_traj import WorldTraj
 #filename = '../util/test_over_under.json'
 #filename = '../util/test_over_under_baby.json'
 #filename = '../util/test_empty.json'
-#filename = '../util/test_saw.json'
+filename = '../util/test_saw.json'
 #filename = '../util/test_impossible.json'
-filename = '../util/mymap.json'
+#filename = '../util/mymap.json'
 #filename = '../util/test_forest.json'
 #filename = '../util/test_lab_1.json'
 
