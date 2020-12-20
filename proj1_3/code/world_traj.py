@@ -8,18 +8,18 @@ from flightsim.axes3ds import Axes3Ds
 
 class WorldTraj(object):
     """
-
+    Given a world with a start and a goal, use graph_search.py to generate a path, then generate a polynomial trajectory
+    using a sparsified version of that path. Update function provides the desired state at the provided time. Other
+    functions are internal for reducing dense path or setting up trajectory constraints.
     """
 
     def __init__(self, world, start, goal):
         """
         This is the constructor for the trajectory object. A fresh trajectory
         object will be constructed before each mission. For a world trajectory,
-        the input arguments are start and end positions and a world object. You
-        are free to choose the path taken in any way you like.
+        the input arguments are start and end positions and a world object.
 
-        You should initialize parameters and pre-compute values such as
-        polynomial coefficients here.
+        Computes polynomial coefficients for desired path
 
         Parameters:
             world, World object representing the environment obstacles
