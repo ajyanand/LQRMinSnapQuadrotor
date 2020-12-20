@@ -4,7 +4,8 @@ import math
 import time
 
 from flightsim.world import World
-from proj1_3.code.occupancy_map import OccupancyMap # Recommended.
+from proj1_3.code.occupancy_map import OccupancyMap  # Recommended.
+
 
 def graph_search(world, resolution, margin, start, goal, astar):
     """
@@ -22,14 +23,14 @@ def graph_search(world, resolution, margin, start, goal, astar):
                     start and the last point must be the goal. If no path
                     exists, return None.
     """
+
     class Node:
         # tracks the index, parent and costs of each node in the graph
         def __init__(self, index, parent, gcost, hcost):
             self.index = index
-            self.parent = parent # index of parent
+            self.parent = parent  # index of parent
             self.g = gcost
             self.h = hcost
-
 
     # While not required, we have provided an occupancy map you may use or modify.
     occ_map = OccupancyMap(world, resolution, margin)
@@ -41,15 +42,15 @@ def graph_search(world, resolution, margin, start, goal, astar):
     unexploredPointExists = 1
     # makes sure path isn't trivial before starting loop
     if (start_index != goal_index):
-        notatgoal=1
+        notatgoal = 1
         curr_ind = start_index
-        curr_node = Node(start_index, start_index, 0, math.sqrt(sum((goal-start)**2)))
+        curr_node = Node(start_index, start_index, 0, math.sqrt(sum((goal - start) ** 2)))
         curr_pos = occ_map.index_to_metric_center(curr_ind)
         curr_key = tuple(curr_ind)
 
         goal_cent_pos = occ_map.index_to_metric_center(goal_index)
     else:
-        notatgoal=0
+        notatgoal = 0
     # can't leave visited empty, or the np.all comparison doesn't work
     visited_nodes = {tuple(start_index): curr_node}
     unvisited_nodes = {}
@@ -62,14 +63,14 @@ def graph_search(world, resolution, margin, start, goal, astar):
 
     # precalculate g addition values
     neighborList = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1],
-                                        [-1, 0, 0], [0, -1, 0], [0, 0, -1],
-                                        [1, 1, 0], [0, 1, 1], [1, 0, 1],
-                                        [-1, -1, 0], [0, -1, -1], [-1, 0, -1],
-                                        [-1, 1, 0], [0, -1, 1], [-1, 0, 1],
-                                        [1, -1, 0], [0, 1, -1], [1, 0, -1],
-                                        [1, 1, 1], [-1, -1, -1], [-1, 1, 1],
-                                        [1, -1, 1], [1, 1, -1], [-1, -1, 1],
-                                        [-1, 1, -1], [1, -1, -1]]) + 1
+                             [-1, 0, 0], [0, -1, 0], [0, 0, -1],
+                             [1, 1, 0], [0, 1, 1], [1, 0, 1],
+                             [-1, -1, 0], [0, -1, -1], [-1, 0, -1],
+                             [-1, 1, 0], [0, -1, 1], [-1, 0, 1],
+                             [1, -1, 0], [0, 1, -1], [1, 0, -1],
+                             [1, 1, 1], [-1, -1, -1], [-1, 1, 1],
+                             [1, -1, 1], [1, 1, -1], [-1, -1, 1],
+                             [-1, 1, -1], [1, -1, -1]]) + 1
     costToNeighbor = np.zeros((26, 1))
     refpos = occ_map.index_to_metric_center(np.array([1, 1, 1]))
 
@@ -77,20 +78,19 @@ def graph_search(world, resolution, margin, start, goal, astar):
         neigh_pos = occ_map.index_to_metric_center(neighborList[i, :])
         costToNeighbor[i] = math.sqrt(sum((neigh_pos - refpos) ** 2))
 
-
     # main algorithm
     while unexploredPointExists:
         time_start_neighbor = time.time()
         # get valid neighbors
-        neighborList = curr_ind+np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1],
-                                        [-1, 0, 0], [0, -1, 0], [0, 0, -1],
-                                        [1, 1, 0], [0, 1, 1], [1, 0, 1],
-                                        [-1, -1, 0], [0, -1, -1], [-1, 0, -1],
-                                        [-1, 1, 0], [0, -1, 1], [-1, 0, 1],
-                                        [1, -1, 0], [0, 1, -1], [1, 0, -1],
-                                        [1, 1, 1], [-1, -1, -1], [-1, 1, 1],
-                                        [1, -1, 1], [1, 1, -1], [-1, -1, 1],
-                                        [-1, 1, -1], [1, -1, -1]])
+        neighborList = curr_ind + np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1],
+                                            [-1, 0, 0], [0, -1, 0], [0, 0, -1],
+                                            [1, 1, 0], [0, 1, 1], [1, 0, 1],
+                                            [-1, -1, 0], [0, -1, -1], [-1, 0, -1],
+                                            [-1, 1, 0], [0, -1, 1], [-1, 0, 1],
+                                            [1, -1, 0], [0, 1, -1], [1, 0, -1],
+                                            [1, 1, 1], [-1, -1, -1], [-1, 1, 1],
+                                            [1, -1, 1], [1, 1, -1], [-1, -1, 1],
+                                            [-1, 1, -1], [1, -1, -1]])
         for i in range(0, 26):
             neighbor = neighborList[i]
             # if on the map, unvisited, and unoccupied
@@ -101,7 +101,7 @@ def graph_search(world, resolution, margin, start, goal, astar):
                 time_occcheck += time.time() - time_start
 
                 if ~(neighbor_key in visited_nodes):
-                    #if unoccupied
+                    # if unoccupied
                     if ~occ_map.is_occupied_index(neighbor):
                         # check if you've hit the goal
                         time_occcheck3 += time.time() - time_start_2
@@ -123,7 +123,7 @@ def graph_search(world, resolution, margin, start, goal, astar):
                             # Plus the Heuristic, if A*
                             if astar:
                                 neig_pos = occ_map.index_to_metric_center(neighbor)
-                                h = math.sqrt(sum((goal-neig_pos)**2))
+                                h = math.sqrt(sum((goal - neig_pos) ** 2))
                             else:
                                 h = 0
                             if neighbor_key in unvisited_nodes:
@@ -137,7 +137,7 @@ def graph_search(world, resolution, margin, start, goal, astar):
                             else:
                                 # add the neighbor to the list of unvisited nodes, and the the priority queue
                                 unvisited_nodes[neighbor_key] = Node(neighbor, curr_ind, g, h)
-                                heappush(unvisited_PQ, (g+h, neighbor_key))
+                                heappush(unvisited_PQ, (g + h, neighbor_key))
                             time_occcheck2 += time.time() - time_start
 
         time_neighbor += (time.time() - time_start_neighbor)
@@ -192,7 +192,7 @@ def graph_search(world, resolution, margin, start, goal, astar):
 
         while ~np.all(curr_node.parent == start_index):
             path.append(occ_map.index_to_metric_center(curr_node.index))
-            #print("position: ",occ_map.index_to_metric_center(curr_node.index)," g: ",curr_node.g," h: ",curr_node.h)
+            # print("position: ",occ_map.index_to_metric_center(curr_node.index)," g: ",curr_node.g," h: ",curr_node.h)
             curr_node = visited_nodes[tuple(curr_node.parent)]
         # add the start location, flip, and convert to a Nx3 matrix
         path.append(start)
@@ -201,10 +201,3 @@ def graph_search(world, resolution, margin, start, goal, astar):
         print("Time in Neighbors: ", time_neighbor)
 
         return path
-
-
-
-
-
-
-
