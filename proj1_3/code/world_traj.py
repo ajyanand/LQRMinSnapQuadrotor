@@ -370,7 +370,7 @@ def goalStopConstraint(i, k, n, d, dt_i):
 
 def calcSnapPoly(coeff, t):
     """
-    returns x through its 4th derivative, evaluated at time t with the provided coefficients
+    returns x through its 4th derivative, evaluated at time t with the provided polynomial coefficients (coeff)
     """
     x = coeff[0] + coeff[1] * t + coeff[2] * (t ** 2) + coeff[3] * (t ** 3) + \
         coeff[4] * (t ** 4) + coeff[5] * (t ** 5) + coeff[6] * (t ** 6) + coeff[7] * (t ** 7)
