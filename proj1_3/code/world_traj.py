@@ -2,8 +2,6 @@ import numpy as np
 import cvxopt
 from scipy.special import factorial
 from proj1_3.code.graph_search import graph_search
-import matplotlib.pyplot as plt
-from flightsim.axes3ds import Axes3Ds
 
 
 class WorldTraj(object):
