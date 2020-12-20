@@ -19,7 +19,7 @@ class WorldTraj(object):
         object will be constructed before each mission. For a world trajectory,
         the input arguments are start and end positions and a world object.
 
-        Computes polynomial coefficients for desired path
+        Computes polynomial coefficients for desired path when initiated.
 
         Parameters:
             world, World object representing the environment obstacles
@@ -27,15 +27,11 @@ class WorldTraj(object):
             goal,  xyz position in meters, shape=(3,)
 
         """
-
-        # You must choose resolution and margin parameters to use for path
-        # planning. In the previous project these were provided to you; now you
-        # must chose them for yourself. Your may try these default values, but
-        # you should experiment with them!
+        # These parameters can be tweaked depending on the map
         self.resolution = np.array([0.25, 0.25, 0.25])
         self.margin = 0.5
         # margin for point elimination in douglas peucker
-        self.eps = self.margin / 1
+        self.eps = self.margin / .5
 
         # Dense path returned from Dijkstra (astar = false) or AStar
         self.path = graph_search(world, self.resolution, self.margin, start, goal, astar=True)
