@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2d262a36-2164-4c70-9b5d-023d51c8b2f2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proj1_3/code/graph_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/proj1_3/code/graph_search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proj1_3/code/world_traj.py" beforeDir="false" afterPath="$PROJECT_DIR$/proj1_3/code/world_traj.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,40 +114,48 @@
       <option name="project" value="LOCAL" />
       <updated>1608492079518</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Style edits">
+      <created>1608493476657</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1608493476657</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Neatened code/comments in world_traj.py." />
     <MESSAGE value="Neatened code/comments" />
     <MESSAGE value="Selected maze map" />
-    <option name="LAST_COMMIT_MESSAGE" value="Selected maze map" />
+    <MESSAGE value="Style edits" />
+    <option name="LAST_COMMIT_MESSAGE" value="Style edits" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="329" y="7" key="CommitChangelistDialog2" timestamp="1608492078622">
+    <state x="329" y="7" key="CommitChangelistDialog2" timestamp="1608493475828">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="329" y="7" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608492078622" />
+    <state x="329" y="7" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608493475828" />
     <state x="548" y="154" key="FileChooserDialogImpl" timestamp="1600976578376">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="154" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1600976578376" />
-    <state width="1515" height="123" key="GridCell.Tab.0.bottom" timestamp="1608491961603">
+    <state width="1515" height="123" key="GridCell.Tab.0.bottom" timestamp="1608493676639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="123" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608491961603" />
-    <state width="1515" height="123" key="GridCell.Tab.0.center" timestamp="1608491961602">
+    <state width="1515" height="123" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608493676639" />
+    <state width="1515" height="123" key="GridCell.Tab.0.center" timestamp="1608493676638">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="123" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608491961602" />
-    <state width="1515" height="123" key="GridCell.Tab.0.left" timestamp="1608491961602">
+    <state width="1515" height="123" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608493676638" />
+    <state width="1515" height="123" key="GridCell.Tab.0.left" timestamp="1608493676638">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="123" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608491961602" />
-    <state width="1515" height="123" key="GridCell.Tab.0.right" timestamp="1608491961602">
+    <state width="1515" height="123" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608493676638" />
+    <state width="1515" height="123" key="GridCell.Tab.0.right" timestamp="1608493676639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="123" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608491961602" />
+    <state width="1515" height="123" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608493676639" />
     <state x="848" y="248" key="com.intellij.ide.util.TipDialog" timestamp="1608488912401">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -168,7 +176,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/proj1_3/code/world_traj.py</url>
-          <line>355</line>
+          <line>367</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>

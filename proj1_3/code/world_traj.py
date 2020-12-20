@@ -183,7 +183,9 @@ def dougPeuck(points, margin):
 
 
 def furthestPoint(start, goal, pointlist):
-    # Takes 2 points (start and goal) and returns the furthest point (in pointlist) from the line between them
+    """
+    Takes 2 points (start and goal) and returns the furthest point (in pointlist) from the line between them
+    """
 
     # base of the triangle
     b = np.linalg.norm(start - goal)
@@ -206,11 +208,13 @@ def furthestPoint(start, goal, pointlist):
 
 
 def calcH_i(i, n, d, dt_i):
-    # integral of snap squared over ith polynomial, aka cost
-    # i:index of polynomial
-    # n:number of polynomials (num waypoints-1)
-    # d:terms per polynomial (8, for min snap)
-    # dt_i: delta t for the ith segment
+    """
+    integral of snap squared over ith polynomial, aka cost
+    i:index of polynomial
+    n:number of polynomials (num waypoints-1)
+    d:terms per polynomial (8, for min snap)
+    dt_i: delta t for the ith segment
+    """
     H_i = np.zeros((4 * d * n, 4 * d * n))
     coeffs = np.zeros((1, d - 4))
     j = np.arange(4, d)
@@ -227,12 +231,12 @@ def calcH_i(i, n, d, dt_i):
 def calcAb_i1(i, n, d, dt_i, w_i, w_ip1):
     """
     Position constraints for minsnap QP
-    :param i: Index of polynomial (which eq you are on)
-    :param n: total number of polynomials
-    :param d: # terms per polynomial
-    :param dt_i: duration of current time segment
-    :param w_i: waypoint at start of current segment
-    :param w_ip1: waypoint at end of current segment
+     i: Index of polynomial (which eq you are on)
+     n: total number of polynomials
+     d: # terms per polynomial
+     dt_i: duration of current time segment
+     w_i: waypoint at start of current segment
+     w_ip1: waypoint at end of current segment
     :return: A and b for Ax=b constraint of QP
     """
     Ai_1 = np.zeros((8, 4 * d * n))  # 2xlen(state)=8
@@ -259,11 +263,11 @@ def calcAb_i1(i, n, d, dt_i, w_i, w_ip1):
 def calcAb_i2k(i, k, n, d, dt_i):
     """
     derivative continuity constraints up to kth order derivative
-    :param i: index of polynomial (which segment you are in)
-    :param k: Order of derivative being taken
-    :param n: Total # polynomials
-    :param d: # terms per polynomial
-    :param dt_i: duration of the ith segment
+     i: index of polynomial (which segment you are in)
+     k: Order of derivative being taken
+     n: Total # polynomials
+     d: # terms per polynomial
+     dt_i: duration of the ith segment
     :return: A and b for Ax = b equality constraint of QP
     """
 
@@ -290,13 +294,13 @@ def calcAb_i2k(i, k, n, d, dt_i):
 def addCorridorConstraints(dt, wi, wip1, num_subpoints, margin, d, n, i):
     """
     Returns num_subpoints corridor constraints of the form Gx<=h
-    :param dt: The delta time for the whole time interval
-    :param wi: waypoint i
-    :param wip1: waypoint i+1
-    :param num_subpoints: number of intermediate points between wi and wi+1 to add corridor constraints on
-    :param margin: how wide the corridor is
-    :param d: number of coefficients in each polynomial
-    :param n: number of polynomials
+    dt: The delta time for the whole time interval
+    wi: waypoint i
+    wip1: waypoint i+1
+    num_subpoints: number of intermediate points between wi and wi+1 to add corridor constraints on
+    margin: how wide the corridor is
+    d: number of coefficients in each polynomial
+    n: number of polynomials
     :return: G,h of Gx<=h
     """
     # 6=x,y,z* 2(for both ends of absolute value)
@@ -332,6 +336,14 @@ def addCorridorConstraints(dt, wi, wip1, num_subpoints, margin, d, n, i):
 
 
 def goalStopConstraint(i, k, n, d, dt_i):
+    """
+     i: index of polynomial (which segment you are in)
+     k: Order of derivative being taken
+     n: Total # polynomials
+     d: # terms per polynomial
+     dt_i: duration of the ith segment
+    :return: Ag,bg, equality constraints for goal which set the final velocity and acceleration to 0
+    """
     Ag = np.zeros((k * 4, 4 * d * n))
     bg = np.zeros((k * 4, 1))
     startind = i * 4 * d
@@ -357,7 +369,9 @@ def goalStopConstraint(i, k, n, d, dt_i):
 
 
 def calcSnapPoly(coeff, t):
-    # returns x through its 4th derivative, evaluated at time t with the provided coefficients
+    """
+    returns x through its 4th derivative, evaluated at time t with the provided coefficients
+    """
     x = coeff[0] + coeff[1] * t + coeff[2] * (t ** 2) + coeff[3] * (t ** 3) + \
         coeff[4] * (t ** 4) + coeff[5] * (t ** 5) + coeff[6] * (t ** 6) + coeff[7] * (t ** 7)
     xd = coeff[1] + 2 * coeff[2] * (t) + 3 * coeff[3] * (t ** 2) + \
