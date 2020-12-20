@@ -48,7 +48,6 @@ class SE3Control(object):
         self.Kd = 2 * np.sqrt(self.Kp)
         self.KR = np.diag(np.array([KRXY, KRXY, KRZ]))
         self.Kw = 2 * np.sqrt(self.KR)
-        # STUDENT CODE HERE
 
     def update(self, t, state, flat_output):
         """
@@ -83,7 +82,6 @@ class SE3Control(object):
         cmd_moment = np.zeros((3,))
         cmd_q = np.zeros((4,))
 
-        # STUDENT CODE HERE
         # Geometric Nonlinear Controller
         # Rotation Matrix
         R = (Rotation.from_quat(state["q"])).as_matrix()
