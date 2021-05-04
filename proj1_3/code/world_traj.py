@@ -59,6 +59,11 @@ class WorldTraj(object):
             h = np.zeros((0, 1))
 
             H = np.zeros((4 * d * n, 4 * d * n))
+
+            Ag, bg = startStoppedConstraint(n, d)
+            Aeq = np.concatenate((Aeq, Ag), axis=0)
+            beq = np.concatenate((beq, bg), axis=0)
+
             for i in range(0, n):
                 Ai1, bi1 = calcAb_i1(i, n, d, dt[i], self.points[i], self.points[i + 1])
                 Aeq = np.concatenate((Aeq, Ai1), axis=0)
@@ -358,6 +363,18 @@ def goalStopConstraint(i, k, n, d, dt_i):
     Ag[5, sigind + 1] = dt
     Ag[6, sigind + 2] = dt
     Ag[7, sigind + 3] = dt
+
+    return Ag, bg
+
+def startStoppedConstraint(n, d):
+    '''
+    n: Total # polynomials
+    d: # terms per polynomial
+    :return: Ag, bg Equality constraints setting v(0) and a(0) = 0
+    '''
+    Ag = np.zeros((2 * 4, 4 * d * n))
+    bg = np.zeros((2 * 4, 1))
+    Ag[0:8, 4:4+8] = np.eye(8)
 
     return Ag, bg
 

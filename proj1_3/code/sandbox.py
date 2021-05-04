@@ -22,19 +22,19 @@ from proj1_3.code.world_traj import WorldTraj
 # mpl.rcParams['figure.dpi'] = 200
 
 # Choose a test example file. You should write your own example files too!
-#filename = '../util/test_window.json'
-filename = '../util/test_maze.json'
-#filename = '../util/test_over_under.json'
-#filename = '../util/test_over_under_baby.json'
-#filename = '../util/test_impossible.json'
-#filename = '../util/mymap.json'
+# filename = '../util/test_window.json'
+#filename = '../util/test_maze.json'
+filename = '../util/test_over_under.json'
+# filename = '../util/test_over_under_baby.json'
+# filename = '../util/test_impossible.json'
+# filename = '../util/mymap.json'
 
 
 # Load the test example.
-file = Path(inspect.getsourcefile(lambda:0)).parent.resolve() / '..' / 'util' / filename
-world = World.from_file(file)          # World boundary and obstacles.
-start  = world.world['start']          # Start point, shape=(3,)
-goal   = world.world['goal']           # Goal point, shape=(3,)
+file = Path(inspect.getsourcefile(lambda: 0)).parent.resolve() / '..' / 'util' / filename
+world = World.from_file(file)  # World boundary and obstacles.
+start = world.world['start']  # Start point, shape=(3,)
+goal = world.world['goal']  # Goal point, shape=(3,)
 
 # This object defines the quadrotor dynamical model and should not be changed.
 quadrotor = Quadrotor(quad_params)
@@ -69,7 +69,7 @@ planning_end_time = time.time()
 t_final = 60
 initial_state = {'x': start,
                  'v': (0, 0, 0),
-                 'q': (0, 0, 0, 1), # [i,j,k,w]
+                 'q': (0, 0, 0, 1),  # [i,j,k,w]
                  'w': (0, 0, 0)}
 
 # Perform simulation.
@@ -81,10 +81,10 @@ initial_state = {'x': start,
 print()
 print('Simulate.')
 (sim_time, state, control, flat, exit) = simulate(initial_state,
-                                              quadrotor,
-                                              my_se3_control,
-                                              my_world_traj,
-                                              t_final)
+                                                  quadrotor,
+                                                  my_se3_control,
+                                                  my_world_traj,
+                                                  t_final)
 print(exit.value)
 
 # Print results.
@@ -96,7 +96,7 @@ collision_pts = world.path_collisions(state['x'], robot_radius)
 stopped_at_goal = (exit == ExitStatus.COMPLETE) and np.linalg.norm(state['x'][-1] - goal) <= 0.05
 no_collision = collision_pts.size == 0
 flight_time = sim_time[-1]
-flight_distance = np.sum(np.linalg.norm(np.diff(state['x'], axis=0),axis=1))
+flight_distance = np.sum(np.linalg.norm(np.diff(state['x'], axis=0), axis=1))
 planning_time = planning_end_time - planning_start_time
 
 print()
@@ -121,7 +121,7 @@ fig = plt.figure('A* Path, Waypoints, and Trajectory')
 ax = Axes3Ds(fig)
 world.draw(ax)
 ax.plot([start[0]], [start[1]], [start[2]], 'go', markersize=16, markeredgewidth=3, markerfacecolor='none')
-ax.plot( [goal[0]],  [goal[1]],  [goal[2]], 'ro', markersize=16, markeredgewidth=3, markerfacecolor='none')
+ax.plot([goal[0]], [goal[1]], [goal[2]], 'ro', markersize=16, markeredgewidth=3, markerfacecolor='none')
 if hasattr(my_world_traj, 'path'):
     if my_world_traj.path is not None:
         world.draw_line(ax, my_world_traj.path, color='red', linewidth=1)
@@ -144,8 +144,8 @@ ax.legend(handles=[
 x = state['x']
 x_des = flat['x']
 ax = axes[0]
-ax.plot(sim_time, x_des[:,0], 'r', sim_time, x_des[:,1], 'g', sim_time, x_des[:,2], 'b')
-ax.plot(sim_time, x[:,0], 'r.',    sim_time, x[:,1], 'g.',    sim_time, x[:,2], 'b.')
+ax.plot(sim_time, x_des[:, 0], 'r', sim_time, x_des[:, 1], 'g', sim_time, x_des[:, 2], 'b')
+ax.plot(sim_time, x[:, 0], 'r.', sim_time, x[:, 1], 'g.', sim_time, x[:, 2], 'b.')
 ax.legend(('x', 'y', 'z'), loc='upper right')
 ax.set_ylabel('position, m')
 ax.grid('major')
@@ -153,8 +153,8 @@ ax.set_title('Position')
 v = state['v']
 v_des = flat['x_dot']
 ax = axes[1]
-ax.plot(sim_time, v_des[:,0], 'r', sim_time, v_des[:,1], 'g', sim_time, v_des[:,2], 'b')
-ax.plot(sim_time, v[:,0], 'r.',    sim_time, v[:,1], 'g.',    sim_time, v[:,2], 'b.')
+ax.plot(sim_time, v_des[:, 0], 'r', sim_time, v_des[:, 1], 'g', sim_time, v_des[:, 2], 'b')
+ax.plot(sim_time, v[:, 0], 'r.', sim_time, v[:, 1], 'g.', sim_time, v[:, 2], 'b.')
 ax.legend(('x', 'y', 'z'), loc='upper right')
 ax.set_ylabel('velocity, m/s')
 ax.set_xlabel('time, s')
@@ -162,25 +162,23 @@ ax.grid('major')
 
 a_des = flat['x_ddot']
 ax = axes[2]
-ax.plot(sim_time, a_des[:,0], 'r', sim_time, a_des[:,1], 'g', sim_time, a_des[:,2], 'b')
+ax.plot(sim_time, a_des[:, 0], 'r', sim_time, a_des[:, 1], 'g', sim_time, a_des[:, 2], 'b')
 ax.legend(('x', 'y', 'z'), loc='upper right')
 ax.set_ylabel('accel, m/s')
 ax.set_xlabel('time, s')
 ax.grid('major')
 
-
 j_des = flat['x_dddot']
 ax = axes[3]
-ax.plot(sim_time, j_des[:,0], 'r', sim_time, j_des[:,1], 'g', sim_time, j_des[:,2], 'b')
+ax.plot(sim_time, j_des[:, 0], 'r', sim_time, j_des[:, 1], 'g', sim_time, j_des[:, 2], 'b')
 ax.legend(('x', 'y', 'z'), loc='upper right')
 ax.set_ylabel('jerk, m/s')
 ax.set_xlabel('time, s')
 ax.grid('major')
 
-
 s_des = flat['x_ddddot']
 ax = axes[4]
-ax.plot(sim_time, s_des[:,0], 'r', sim_time, s_des[:,1], 'g', sim_time, s_des[:,2], 'b')
+ax.plot(sim_time, s_des[:, 0], 'r', sim_time, s_des[:, 1], 'g', sim_time, s_des[:, 2], 'b')
 ax.legend(('x', 'y', 'z'), loc='upper right')
 ax.set_ylabel('snap, m/s')
 ax.set_xlabel('time, s')
@@ -191,15 +189,15 @@ ax.grid('major')
 q_des = control['cmd_q']
 q = state['q']
 ax = axes[0]
-ax.plot(sim_time, q_des[:,0], 'r', sim_time, q_des[:,1], 'g', sim_time, q_des[:,2], 'b', sim_time, q_des[:,3], 'k')
-ax.plot(sim_time, q[:,0], 'r.',    sim_time, q[:,1], 'g.',    sim_time, q[:,2], 'b.',    sim_time, q[:,3],     'k.')
+ax.plot(sim_time, q_des[:, 0], 'r', sim_time, q_des[:, 1], 'g', sim_time, q_des[:, 2], 'b', sim_time, q_des[:, 3], 'k')
+ax.plot(sim_time, q[:, 0], 'r.', sim_time, q[:, 1], 'g.', sim_time, q[:, 2], 'b.', sim_time, q[:, 3], 'k.')
 ax.legend(('i', 'j', 'k', 'w'), loc='upper right')
 ax.set_ylabel('quaternion')
 ax.set_xlabel('time, s')
 ax.grid('major')
 w = state['w']
 ax = axes[1]
-ax.plot(sim_time, w[:,0], 'r.', sim_time, w[:,1], 'g.', sim_time, w[:,2], 'b.')
+ax.plot(sim_time, w[:, 0], 'r.', sim_time, w[:, 1], 'g.', sim_time, w[:, 2], 'b.')
 ax.legend(('x', 'y', 'z'), loc='upper right')
 ax.set_ylabel('angular velocity, rad/s')
 ax.set_xlabel('time, s')
@@ -209,14 +207,14 @@ ax.grid('major')
 (fig, axes) = plt.subplots(nrows=3, ncols=1, sharex=True, num='Commands vs Time')
 s = control['cmd_motor_speeds']
 ax = axes[0]
-ax.plot(sim_time, s[:,0], 'r.', sim_time, s[:,1], 'g.', sim_time, s[:,2], 'b.', sim_time, s[:,3], 'k.')
+ax.plot(sim_time, s[:, 0], 'r.', sim_time, s[:, 1], 'g.', sim_time, s[:, 2], 'b.', sim_time, s[:, 3], 'k.')
 ax.legend(('1', '2', '3', '4'), loc='upper right')
 ax.set_ylabel('motor speeds, rad/s')
 ax.grid('major')
 ax.set_title('Commands')
 M = control['cmd_moment']
 ax = axes[1]
-ax.plot(sim_time, M[:,0], 'r.', sim_time, M[:,1], 'g.', sim_time, M[:,2], 'b.')
+ax.plot(sim_time, M[:, 0], 'r.', sim_time, M[:, 1], 'g.', sim_time, M[:, 2], 'b.')
 ax.legend(('x', 'y', 'z'), loc='upper right')
 ax.set_ylabel('moment, N*m')
 ax.grid('major')
@@ -232,16 +230,15 @@ fig = plt.figure('3D Path')
 ax = Axes3Ds(fig)
 world.draw(ax)
 ax.plot([start[0]], [start[1]], [start[2]], 'go', markersize=16, markeredgewidth=3, markerfacecolor='none')
-ax.plot( [goal[0]],  [goal[1]],  [goal[2]], 'ro', markersize=16, markeredgewidth=3, markerfacecolor='none')
+ax.plot([goal[0]], [goal[1]], [goal[2]], 'ro', markersize=16, markeredgewidth=3, markerfacecolor='none')
 world.draw_line(ax, flat['x'], color='black', linewidth=2)
 world.draw_points(ax, state['x'], color='blue', markersize=4)
 if collision_pts.size > 0:
-    ax.plot(collision_pts[0,[0]], collision_pts[0,[1]], collision_pts[0,[2]], 'rx', markersize=36, markeredgewidth=4)
+    ax.plot(collision_pts[0, [0]], collision_pts[0, [1]], collision_pts[0, [2]], 'rx', markersize=36, markeredgewidth=4)
 ax.legend(handles=[
     Line2D([], [], color='black', linewidth=2, label='Trajectory'),
     Line2D([], [], color='blue', linestyle='', marker='.', markersize=4, label='Flight')],
     loc='upper right')
-
 
 # Animation (Slow)
 #
@@ -249,7 +246,5 @@ ax.legend(handles=[
 
 R = Rotation.from_quat(state['q']).as_dcm()
 animate(sim_time, state['x'], R, world=world, filename=None, show_axes=True)
-
-
 
 plt.show()
