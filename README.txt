@@ -1,6 +1,8 @@
-Taylor Shelby
-MEAM 620 Advanced Robotics project
+Ajay Anand and Taylor Shelby
+ESE 650 Final Project
 
+
+Python Quadrotor Sim used is sourced from the class materials of MEAM 620 - Advanced Robotics at the University of Pennsyvania
 
 sandbox.py: Runs the teacher provided simulation on a specified map file using the student provided control (se3_control.py) path planning (graph_search.py) and trajectory creation (world_traj.py). Graphs and animates results, including path planning results vs. actual trajectory, system state along trajectory, and more. 
 
