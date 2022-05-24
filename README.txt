@@ -1,6 +1,7 @@
 Ajay Anand and Taylor Shelby
 ESE 650 Final Project
 
+![Alt Text](https://github.com/ajyanand/LQRMinSnapQuadrotor/blob/main/OverUnderAlone.gif)
 
 Python Quadrotor Sim used is sourced from the class materials of MEAM 620 - Advanced Robotics at the University of Pennsyvania
 
@@ -13,6 +14,9 @@ graph_search.py: Uses provided map, resolution, and margin to search for a path 
 world_traj.py: Calls graph_search.py to get a path if one exists, then reduce the dense path to sparse path. Sparse path used to generate constraints for cvxopt quadratic program(QP), QP results used to generate polynomials representing desired quad-rotor state at particular time. 
 
 Other files (flightsim, occupancy_map, etc) are teacher provided unless otherwise specified.
+
+open_loop_template.py implements an open loop controller
+LQR.py implements the Linear Quadratic Regulator.
 
 
 Other sources:
