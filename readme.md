@@ -17,6 +17,7 @@ world_traj.py: Calls graph_search.py to get a path if one exists, then reduce th
 Other files (flightsim, occupancy_map, etc) are teacher provided unless otherwise specified.
 
 open_loop_template.py implements an open loop controller
+
 LQR.py implements the Linear Quadratic Regulator.
 
 
