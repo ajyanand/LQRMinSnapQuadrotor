@@ -1,7 +1,8 @@
-ESE 650 Final Project
-Ajay Anand and Taylor Shelby
-
 ![Alt Text](https://github.com/ajyanand/LQRMinSnapQuadrotor/blob/main/OverUnderAlone.gif)
+
+# ESE 650 Final Project
+
+## Ajay Anand and Taylor Shelby
 
 Python Quadrotor Sim used is sourced from the class materials of MEAM 620 - Advanced Robotics at the University of Pennsyvania
 
